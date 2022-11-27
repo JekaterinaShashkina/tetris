@@ -291,6 +291,10 @@ document.addEventListener("DOMContentLoaded", () => {
       then = now - (delta % interval);
       moveDown();
     }
+    const hue = parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue("--hue")
+    );
+    document.documentElement.style.setProperty("--hue", hue + delta * 0.0005);
   }
 
   function runTimer() {

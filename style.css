@@ -4,6 +4,11 @@
        We have 10/16 = 0.625 = 1rem as it is set on root element.
        So 1rem is now 10px throughout our stylesheet.*/
   font-size: 0.625em;
+  --hue: 120;
+  --saturation: 50%;
+  --foreground-color: hsl(var(--hue), var(--saturation), 75%);
+  --background-color: hsl(var(--hue), var(--saturation), 40%);
+  --hoverground-color: hsl(var(--hue), var(--saturation), 60%);
 }
 
 * {
@@ -16,12 +21,7 @@ body {
   margin: auto;
   max-width: 60rem;
   color: #f3f8f7;
-  background: radial-gradient(
-    circle,
-    rgb(28, 119, 205) 0%,
-    rgb(238, 246, 7) 89%,
-    rgb(223, 223, 2) 100%
-  );
+  background-color: var(--background-color);
 }
 
 header {
@@ -32,6 +32,10 @@ header {
 div {
   height: 2rem;
   width: 2rem;
+}
+
+.title {
+  color: var(--foreground-color);
 }
 
 /* some utility classes */
@@ -121,42 +125,19 @@ div {
 
 .button {
   position: relative;
-  width: 22rem;
-  height: 2.2rem;
+  display: flex;
+  width: 200px;
+  padding: 15px 40px;
   text-align: center;
-  color: #fff;
-  letter-spacing: 1px;
-  text-decoration: none;
-  line-height: 23px;
-  font-size: 10px;
-  display: block;
-  margin: 30px;
-  text-shadow: -1px -1px 0 #a84155;
-  background: #d2d250;
-  border: 1px solid #d25068;
-  width: 12rem;
-  background-image: linear-gradient(to bottom, #f66c7b, #d25068);
-  border-radius: 5px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
-    0 -1px 0 rgba(255, 255, 255, 0.1) inset, 0 4px 0 #ad4257,
-    0 4px 2px rgba(0, 0, 0, 0.5);
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid rgb(56, 13, 13);
+  border-radius: 8px;
+  background-color: var(--foreground-color);
 }
 
-.button:before {
-  background: #f0f0f0;
-  background-image: linear-gradient(#d0d0d0, #f0f0f0);
-  border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
-  position: absolute;
-  content: "";
-  left: -6px;
-  right: -6px;
-  top: -6px;
-  bottom: -10px;
-  z-index: -1;
-}
-
-.button:active {
+/* .button:active {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
     0 -1px 0 rgba(255, 255, 255, 0.1) inset;
   top: 5px;
@@ -166,65 +147,10 @@ div {
   top: -11px;
   bottom: -5px;
   content: "";
-}
+} */
 
 .button:hover {
-  background: #f66c7b;
-  background-image: linear-gradient(top, #d25068, #f66c7b);
-}
-
-.buttonr {
-  position: relative;
-  width: 22rem;
-  height: 2.2rem;
-  text-align: center;
-  color: #fff;
-  letter-spacing: 1px;
-  text-decoration: none;
-  line-height: 23px;
-  font-size: 10px;
-  display: block;
-  margin: 30px;
-  text-shadow: -1px -1px 0 #a84155;
-  background: #d2d250;
-  border: 1px solid #d25068;
-  width: 12rem;
-  background-image: linear-gradient(to bottom, #f66c7b, #d25068);
-  border-radius: 5px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
-    0 -1px 0 rgba(255, 255, 255, 0.1) inset, 0 4px 0 #ad4257,
-    0 4px 2px rgba(0, 0, 0, 0.5);
-}
-
-.buttonr:before {
-  background: #f0f0f0;
-  background-image: linear-gradient(#d0d0d0, #f0f0f0);
-  border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
-  position: absolute;
-  content: "";
-  left: -6px;
-  right: -6px;
-  top: -6px;
-  bottom: -10px;
-  z-index: -1;
-}
-
-.buttonr:active {
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
-    0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-  top: 5px;
-}
-
-.buttonr:active:before {
-  top: -11px;
-  bottom: -5px;
-  content: "";
-}
-
-.buttonr:hover {
-  background: #f66c7b;
-  background-image: linear-gradient(top, #d25068, #f66c7b);
+  background: var(--hoverground-color);
 }
 
 .end {
@@ -238,13 +164,12 @@ div {
   align-items: center;
   text-align: center;
   margin-top: 1rem;
-  width: 17.5rem;
-  height: 25rem;
-  background: #f0f0f0;
-  background-image: linear-gradient(#d0d0d0, #f0f0f0);
+  width: 200px;
+  height: 30rem;
+  background-color: #f0f0f0;
   border-radius: 5px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
-  color: #85796b;
+  color: #514a42;
 }
 
 .score,
@@ -279,12 +204,11 @@ div {
 }
 .timerDisplay {
   position: relative;
-  width: 92%;
-  background: #ffffff;
-  left: 4%;
-  padding: 40px 0;
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 40px 10px;
   font-family: "Roboto mono", monospace;
-  color: #0ba1e7;
+  color: var(--hoverground-color);
   font-size: 40px;
   display: flex;
   align-items: center;
