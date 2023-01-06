@@ -18,8 +18,8 @@
 body {
   font-family: "Montserrat", sans-serif;
   font-size: 1.6rem;
-  margin: auto;
-  max-width: 60rem;
+  /* margin: auto;
+  max-width: 60rem; */
   color: #f3f8f7;
   background-color: var(--background-color);
 }
@@ -36,46 +36,34 @@ div {
 
 .title {
   color: var(--foreground-color);
-}
-
-/* some utility classes */
-.t-ucase {
+  font-size: 40px;
+  font-weight: 700;
   text-transform: uppercase;
-}
-
-.t-big {
-  font-size: 1.5em;
-}
-
-.t-wide {
   letter-spacing: 1.5rem;
 }
-
-.t-close {
-  letter-spacing: 1rem;
-}
-
-.fw-300 {
-  font-weight: 300;
-}
-
-.fw-400 {
-  font-weight: 400;
+.header__span {
+  font-size: 30px;
+  font-style: italic;
 }
 
 .score-display {
   font-size: 5rem;
-  color: rgb(133, 121, 107, 0.5);
+  color: #f0f0f0;
 }
 
 .game-area {
   display: flex;
+  height: 550px;
   justify-content: center;
+  flex-direction: row;
 }
 
 .game {
-  height: 0;
-  width: 300px;
+  display: flex;
+  height: auto;
+  width: 1300px;
+  justify-content: space-between;
+  padding-top: 30px;
 }
 
 .grid {
@@ -86,17 +74,13 @@ div {
   height: 40rem;
 }
 
-.previous-shape {
-  width: 10rem;
-  padding-left: 2rem;
-  margin-top: -5rem;
-}
-
 .previous-grid {
   display: flex;
   flex-wrap: wrap;
   width: 8rem;
   height: 8rem;
+  align-items: center;
+  margin-top: 15px;
 }
 
 .block {
@@ -121,40 +105,25 @@ div {
 
 .end {
   background-color: #d8edea;
+  background-image: url(\\wsl$\Ubuntu\home\skankt\folders\change\make-your-game\images\blue_block.png);
 }
 
 .button {
-  position: relative;
+  /* position: relative; */
   display: flex;
   width: 200px;
   padding: 15px 40px;
   text-align: center;
   margin-top: 20px;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
   border: 1px solid rgb(56, 13, 13);
   border-radius: 8px;
   background-color: var(--foreground-color);
 }
 
-/* .button:active {
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
-    0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-  top: 5px;
-}
-
-.button:active:before {
-  top: -11px;
-  bottom: -5px;
-  content: "";
-} */
-
 .button:hover {
   background: var(--hoverground-color);
-}
-
-.end {
-  background-image: url(\\wsl$\Ubuntu\home\skankt\folders\change\make-your-game\images\blue_block.png);
 }
 
 .display {
@@ -165,17 +134,20 @@ div {
   text-align: center;
   margin-top: 1rem;
   width: 200px;
-  height: 30rem;
-  background-color: #f0f0f0;
+  background-color: transparent;
   border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
-  color: #514a42;
+
+  color: var(--foreground-color);
+  font-size: 18px;
+  gap: 20px;
 }
 
 .score,
-.lines-display {
+.lines-display,
+.lives {
   padding-top: 1rem;
-  font-size: 1.2rem;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 /*menu*/
@@ -191,10 +163,9 @@ div {
 }
 
 .timer {
-  /* background-color: #fdfefe; */
+  display: flex;
   width: 40%;
   min-width: 50px;
-  position: absolute;
   transform: translate(-50%, -50%);
   top: 85%;
   left: 50%;
@@ -217,10 +188,13 @@ div {
   box-shadow: 0 0 20px rgba(0, 139, 253, 0.25);
 }
 
-.game {
-  height: auto;
-  width: 1300px;
-  display: flex;
-  justify-content: space-between;
-  padding-top: 30px;
+.buttons {
+  width: 200px;
+  height: 100%;
+  padding-top: 10%;
+}
+.lives {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 30px;
 }

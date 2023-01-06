@@ -16,34 +16,31 @@
   </head>
   <body>
     <header>
-      <h1 class="title fw-300 t-ucase">
-        Welcome <br /><span class="fw-400 t-wide t-big t-ucase">to tetris</span>
+      <h1 class="title">
+        Welcome <br /><span class="header__span">to tetris</span>
       </h1>
     </header>
     <main class="game-area">
       <div class="game">
+        <div class="display">
+          <div class="timerDisplay">00 : 00</div>
+
+          <h2 class="score">
+            Your Score <br />
+            <span class="score-display">0</span>
+          </h2>
+          <div class="previous-grid"></div>
+          <h2 class="lines-display">
+            Lines:<span class="lines-score"> 0</span>
+          </h2>
+          <div class="lives">Lives: <span class="lives-score">3</span></div>
+        </div>
         <div class="grid"></div>
 
-        <section>
-          <div class="display">
-            <h1 class="score fw-400 t-ucase">
-              Your Score <br />
-              <span class="score-display t-ucase fw-300">0</span>
-            </h1>
-            <div class="previous-shape">
-              <div class="previous-grid"></div>
-            </div>
-            <h2 class="lines-display fw-400 t-ucase">
-              Lines:<span class="lines-score"> 0</span>
-            </h2>
-          </div>
-          <button class="button button t-ucase" href="#">Start / Pause</button>
-          <button class="button buttonr t-ucase" href="#">Restart Game</button>
-        </section>
-      </div>
-      <div class="timer">
-        <div class="timerDisplay">00 : 00</div>
-        <div class="lives">Lives: <span class="lives-score">3</span></div>
+        <div class="buttons">
+          <button class="button">Start / Pause</button>
+          <button class="button buttonr">Restart Game</button>
+        </div>
       </div>
     </main>
   </body>

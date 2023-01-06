@@ -8,9 +8,9 @@ import {
 } from "./constants.js";
 import { grid, createGrid } from "./createGrid.js";
 import { theTetrominoes } from "./tetrominoes.js";
-startGame();
+
 //document.addEventListener("DOMContentLoaded", () => {
-function startGame() {
+const startGame = () => {
   let squares = Array.from(grid.querySelectorAll("div"));
 
   let width = 10;
@@ -337,7 +337,7 @@ function startGame() {
       // elem.classList.remove("block"),
       //elem.style.backgroundImage == "none"
     );
-    createGrid();
+    // createGrid();
   };
   // Restart game
   const restartBtn = document.querySelector(".buttonr");
@@ -347,4 +347,5 @@ function startGame() {
   };
   restartBtn.addEventListener("click", reload, false); //=> {
   //});
-}
+};
+startGame();
