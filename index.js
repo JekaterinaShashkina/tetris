@@ -6,11 +6,13 @@ import {
   startBtn,
   colors,
 } from "./constants.js";
-import { grid, createGrid } from "./createGrid.js";
+import { createGrid } from "./createGrid.js";
 import { theTetrominoes } from "./tetrominoes.js";
 
 //document.addEventListener("DOMContentLoaded", () => {
 const startGame = () => {
+  const grid = createGrid();
+
   let squares = Array.from(grid.querySelectorAll("div"));
 
   let width = 10;
@@ -288,10 +290,29 @@ const startGame = () => {
     }
   };
 
-  let lives_s = document.querySelector(".lives-score");
-  let live = 3;
   //game over
-  function gameOver() {
+
+  const clearGrid = () => {
+    const list = document.querySelector(".grid");
+    console.log(list);
+    while (list.hasChildNodes()) {
+      list.removeChild(list.firstChild);
+    }
+    // list.forEach(
+    //   // (elem) => console.log(elem[0])
+    //   (elem) => elem.parentNode.removeChild(elem)
+    //   // elem.classList.remove("block"),
+    //   //elem.style.backgroundImage == "none"
+    // );
+    // createGrid();
+  };
+  const gameInit = () => {
+    clearGrid();
+    startGame();
+  };
+  const gameOver = () => {
+    let lives_s = document.querySelector(".lives-score");
+    let live = lives_s.textContent;
     if (
       current.some((index) =>
         squares[currentPosition + index].classList.contains("block2")
@@ -301,43 +322,23 @@ const startGame = () => {
       cancelAnimationFrame(timerId);
       cancelAnimationFrame(timerIid);
       document.removeEventListener("keydown", control);
-      //clearGrid();
-      // cancelAnimationFrame(timerId);
-      // cancelAnimationFrame(timerIid);
-      // document.removeEventListener("keydown", control);
+      live--;
+
       if (live > 0) {
-        live--;
+        gameInit();
+
         lives_s.textContent = "";
         lives_s.textContent = `${live}`;
         console.log(live);
         timerIid = null;
-        console.log(timerIid);
+        // console.log(timerIid);
         timerRef.innerHTML = `00 : 00`;
-        startBtn.addEventListener("click", () => {
-          clearGrid();
-          // playAnimation();
-          // displayShape();
-          // runTimer();
-          startGame();
-        });
-        // clearGrid();
-        // startGame();
-        //reload();
       } else {
+        lives_s.textContent = "";
+        lives_s.textContent = `${live}`;
         scoreDisplay.innerHTML = "end";
       }
     }
-  }
-  const clearGrid = () => {
-    const list = document.querySelectorAll(".grid");
-    console.log(list);
-    list.forEach(
-      // (elem) => console.log(elem[0])
-      (elem) => elem.parentNode.removeChild(elem)
-      // elem.classList.remove("block"),
-      //elem.style.backgroundImage == "none"
-    );
-    // createGrid();
   };
   // Restart game
   const restartBtn = document.querySelector(".buttonr");
@@ -345,7 +346,6 @@ const startGame = () => {
   const reload = () => {
     reload = location.reload();
   };
-  restartBtn.addEventListener("click", reload, false); //=> {
-  //});
+  restartBtn.addEventListener("click", reload, false);
 };
 startGame();

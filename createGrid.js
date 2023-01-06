@@ -1,7 +1,6 @@
 import { GRID_SIZE, GRID_WIDTH } from "./constants.js";
 
-export const grid = createGrid();
-export let squares = Array.from(grid.querySelectorAll("div"));
+// export let squares = Array.from(grid.querySelectorAll("div"));
 
 export function createGrid() {
   //main grid
