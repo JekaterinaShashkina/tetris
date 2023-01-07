@@ -53,10 +53,11 @@ const startGame = () => {
     else if (e.keyCode === 39) moveRight();
     else if (e.keyCode === 40) moveDown();
   };
-  document.addEventListener("keydown", control);
+  //document.addEventListener("keydown", control);
 
   //move down function
   const moveDown = () => {
+    document.addEventListener("keydown", control);
     undraw();
     currentPosition = currentPosition + width;
     draw();
@@ -243,6 +244,7 @@ const startGame = () => {
   };
   //add functionality to the button
   startBtn.addEventListener("click", () => {
+    console.log(timerId);
     if (timerId) {
       cancelAnimationFrame(timerId);
       timerId = null;
@@ -290,26 +292,6 @@ const startGame = () => {
     }
   };
 
-  //game over
-
-  const clearGrid = () => {
-    const list = document.querySelector(".grid");
-    console.log(list);
-    while (list.hasChildNodes()) {
-      list.removeChild(list.firstChild);
-    }
-    // list.forEach(
-    //   // (elem) => console.log(elem[0])
-    //   (elem) => elem.parentNode.removeChild(elem)
-    //   // elem.classList.remove("block"),
-    //   //elem.style.backgroundImage == "none"
-    // );
-    // createGrid();
-  };
-  const gameInit = () => {
-    clearGrid();
-    startGame();
-  };
   const gameOver = () => {
     let lives_s = document.querySelector(".lives-score");
     let live = lives_s.textContent;
@@ -318,11 +300,11 @@ const startGame = () => {
         squares[currentPosition + index].classList.contains("block2")
       )
     ) {
+      live--;
       console.log(live);
       cancelAnimationFrame(timerId);
       cancelAnimationFrame(timerIid);
       document.removeEventListener("keydown", control);
-      live--;
 
       if (live > 0) {
         gameInit();
@@ -330,13 +312,13 @@ const startGame = () => {
         lives_s.textContent = "";
         lives_s.textContent = `${live}`;
         console.log(live);
-        timerIid = null;
-        // console.log(timerIid);
-        timerRef.innerHTML = `00 : 00`;
+        // timerIid = null;
+        // // console.log(timerIid);
+        // timerRef.innerHTML = `00 : 00`;
       } else {
         lives_s.textContent = "";
         lives_s.textContent = `${live}`;
-        scoreDisplay.innerHTML = "end";
+        // scoreDisplay.innerHTML = "end";
       }
     }
   };
@@ -344,8 +326,21 @@ const startGame = () => {
   const restartBtn = document.querySelector(".buttonr");
 
   const reload = () => {
-    reload = location.reload();
+    window.location.reload();
   };
   restartBtn.addEventListener("click", reload, false);
 };
-startGame();
+const gameInit = () => {
+  clearGrid();
+  startGame();
+};
+//game over
+
+const clearGrid = () => {
+  const list = document.querySelector(".grid");
+  console.log(list);
+  while (list.hasChildNodes()) {
+    list.removeChild(list.firstChild);
+  }
+};
+gameInit();
