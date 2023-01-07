@@ -89,7 +89,7 @@ const startGame = () => {
       gameOver();
     }
   };
-  freeze();
+  //freeze();
 
   //move the tetromino left, unless is at the edge or there is a blockage
   const moveLeft = () => {
@@ -306,7 +306,11 @@ const startGame = () => {
       cancelAnimationFrame(timerIid);
       document.removeEventListener("keydown", control);
 
-      if (live > 0) {
+      if (live <= 0) {
+        lives_s.textContent = "";
+        lives_s.textContent = `${live}`;
+        scoreDisplay.innerHTML = "end";
+      } else {
         gameInit();
 
         lives_s.textContent = "";
@@ -315,10 +319,6 @@ const startGame = () => {
         // timerIid = null;
         // // console.log(timerIid);
         // timerRef.innerHTML = `00 : 00`;
-      } else {
-        lives_s.textContent = "";
-        lives_s.textContent = `${live}`;
-        // scoreDisplay.innerHTML = "end";
       }
     }
   };
