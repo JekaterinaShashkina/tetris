@@ -52,6 +52,7 @@ const startGame = () => {
     else if (e.keyCode === 38) rotate();
     else if (e.keyCode === 39) moveRight();
     else if (e.keyCode === 40) moveDown();
+    else if (e.keyCode === 19) startButtonPress();
   };
   //document.addEventListener("keydown", control);
 
@@ -243,7 +244,8 @@ const startGame = () => {
     timerIid = window.requestAnimationFrame(runTimer);
   };
   //add functionality to the button
-  startBtn.addEventListener("click", () => {
+
+  const startButtonPress = () => {
     console.log(timerId);
     if (timerId) {
       cancelAnimationFrame(timerId);
@@ -254,7 +256,39 @@ const startGame = () => {
       displayShape();
       runTimer();
     }
+  };
+  startBtn.addEventListener(
+    "click",
+    startButtonPress
+    // () => {
+    //   console.log(timerId);
+    //   if (timerId) {
+    //     cancelAnimationFrame(timerId);
+    //     timerId = null;
+    //     cancelAnimationFrame(timerIid);
+    //   } else {
+    //     playAnimation();
+    //     displayShape();
+    //     runTimer();
+    //   }
+    // }
+  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "s") {
+      console.log(timerId);
+      if (timerId) {
+        cancelAnimationFrame(timerId);
+        timerId = null;
+        cancelAnimationFrame(timerIid);
+      } else {
+        playAnimation();
+        displayShape();
+        runTimer();
+      }
+    }
   });
+
+  let totalscore = 0;
 
   //add score
   const addScore = () => {
@@ -290,8 +324,8 @@ const startGame = () => {
         squares.forEach((cell) => grid.appendChild(cell));
       }
     }
+    return totalscore;
   };
-
   const gameOver = () => {
     let lives_s = document.querySelector(".lives-score");
     let live = lives_s.textContent;
@@ -309,10 +343,10 @@ const startGame = () => {
       if (live <= 0) {
         lives_s.textContent = "";
         lives_s.textContent = `${live}`;
-        scoreDisplay.innerHTML = "end";
+        scoreDisplay.innerHTML = `game end. Your total score is ${totalscore}`;
       } else {
         gameInit();
-
+        totalscore += score;
         lives_s.textContent = "";
         lives_s.textContent = `${live}`;
         console.log(live);
