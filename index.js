@@ -214,10 +214,10 @@ const startGame = () => {
   let then = Date.now();
   let interval = 1000 / 1;
   let delta /*, dt*/;
-  let time_now;
-  let time_then = Date.now();
-  let time_interval = 1000 / 1;
-  let time_delta /*, time_dt*/;
+  // let time_now;
+  // let time_then = Date.now();
+  // let time_interval = 1000 / 1;
+  // let time_delta /*, time_dt*/;
 
   const playAnimation = () => {
     timerId = window.requestAnimationFrame(playAnimation);
@@ -227,6 +227,7 @@ const startGame = () => {
     if (delta > interval) {
       then = now - (delta % interval);
       moveDown();
+      displayTimer();
     }
     const hue = parseFloat(
       getComputedStyle(document.documentElement).getPropertyValue("--hue")
@@ -234,17 +235,16 @@ const startGame = () => {
     document.documentElement.style.setProperty("--hue", hue + delta * 0.0005);
   };
 
-  const runTimer = () => {
-    time_now = Date.now();
-    time_delta = time_now - time_then;
-    if (time_delta > time_interval) {
-      time_then = time_now - (time_delta % time_interval);
-      displayTimer();
-    }
-    timerIid = window.requestAnimationFrame(runTimer);
-  };
+  // const runTimer = () => {
+  //   time_now = Date.now();
+  //   time_delta = time_now - time_then;
+  //   if (time_delta > time_interval) {
+  //     time_then = time_now - (time_delta % time_interval);
+  //     displayTimer();
+  //   }
+  //   timerIid = window.requestAnimationFrame(runTimer);
+  // };
   //add functionality to the button
-
   const startButtonPress = () => {
     console.log(timerId);
     if (timerId) {
@@ -257,34 +257,10 @@ const startGame = () => {
       runTimer();
     }
   };
-  startBtn.addEventListener(
-    "click",
-    startButtonPress
-    // () => {
-    //   console.log(timerId);
-    //   if (timerId) {
-    //     cancelAnimationFrame(timerId);
-    //     timerId = null;
-    //     cancelAnimationFrame(timerIid);
-    //   } else {
-    //     playAnimation();
-    //     displayShape();
-    //     runTimer();
-    //   }
-    // }
-  );
+  startBtn.addEventListener("click", startButtonPress);
   document.addEventListener("keydown", (e) => {
-    if (e.key === "s") {
-      console.log(timerId);
-      if (timerId) {
-        cancelAnimationFrame(timerId);
-        timerId = null;
-        cancelAnimationFrame(timerIid);
-      } else {
-        playAnimation();
-        displayShape();
-        runTimer();
-      }
+    if (e.keyCode == 32) {
+      startButtonPress();
     }
   });
 
@@ -324,7 +300,23 @@ const startGame = () => {
         squares.forEach((cell) => grid.appendChild(cell));
       }
     }
+    totalscore += score;
     return totalscore;
+  };
+  const modElem = document.querySelector(".modal");
+  const modText = document.querySelector(".modal__text");
+  modElem.style.cssText = `
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: opasity 300ms ease-in-out;
+  `;
+  const closeMod = (e) => {
+    const target = e.target;
+    if (target === modElem || target.closest(".modal__close")) {
+      modElem.style.visibility = "hidden";
+      modElem.style.opacity = 0;
+    }
   };
   const gameOver = () => {
     let lives_s = document.querySelector(".lives-score");
@@ -337,13 +329,16 @@ const startGame = () => {
       live--;
       console.log(live);
       cancelAnimationFrame(timerId);
-      cancelAnimationFrame(timerIid);
+      // cancelAnimationFrame(timerIid);
       document.removeEventListener("keydown", control);
 
       if (live <= 0) {
         lives_s.textContent = "";
-        lives_s.textContent = `${live}`;
-        scoreDisplay.innerHTML = `game end. Your total score is ${totalscore}`;
+        lives_s.textContent = `0`;
+        modElem.style.visibility = "visible";
+        modElem.style.opacity = 1;
+        modText.textContent = `Your score is: ${score}`;
+        modElem.addEventListener("click", closeMod);
       } else {
         gameInit();
         totalscore += score;
@@ -363,6 +358,11 @@ const startGame = () => {
     window.location.reload();
   };
   restartBtn.addEventListener("click", reload, false);
+  document.addEventListener("keydown", (e) => {
+    if (e.keyCode === 82) {
+      reload();
+    }
+  });
 };
 const gameInit = () => {
   clearGrid();
